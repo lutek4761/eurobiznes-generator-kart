@@ -41,8 +41,10 @@ class Card:
         draw.text((20, 50), "{}".format(self.numer), font=font, fill=color)
         draw.text((220, 50), "AKT", font=font, fill=self.text_kolor)
         draw.text((170, 80), "WŁASNOŚCI", font=font, fill=self.text_kolor)
-        draw.text((int(250 - font.getsize("{}".format(self.nazwa_panstwa).upper())[0]/2), 110), "{}".format(self.nazwa_panstwa).upper(), font=font, fill=self.text_kolor)
-        draw.text((int(250 - font.getsize("{}".format(self.nazwa_pola).upper())[0]/2), 140), "{}".format(self.nazwa_pola).upper(), font=font, fill=self.text_kolor)
+        coords = (int(250 - font.getsize("{}".format(self.nazwa_panstwa).upper())[0]/2), 110)
+        draw.text(coords, "{}".format(self.nazwa_panstwa).upper(), font=font, fill=self.text_kolor)
+        coords = (int(250 - font.getsize("{}".format(self.nazwa_pola).upper())[0]/2), 140)
+        draw.text(coords, "{}".format(self.nazwa_pola).upper(), font=font, fill=self.text_kolor)
 
         draw.text((25, 225), "Cena zakupu", font=font2, fill=color)
         draw.text((25, 250), "Opłata za postój", font=font2, fill=color)
