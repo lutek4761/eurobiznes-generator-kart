@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+from PIL import ImageFont, ImageDraw, Image
 
 
 class Card:
@@ -31,48 +32,52 @@ class Card:
         img = np.zeros((625, 500, 3), np.uint8)
         img.fill(255)
         cv2.ellipse(img, (250, 120), (140, 80), 0, 0, 360, self.kolor, thickness=-1)
-        cv2.putText(img, "{}".format(self.numer), (20, 50), 0, 0.8, color, thickness=2)
-        cv2.putText(img, "AKT", (225, 80), 0, 0.8, self.text_kolor, thickness=2)
-        cv2.putText(img, "WLASNOSCI", (180, 110), 0, 0.8, self.text_kolor, thickness=2)
 
+        fontpath = "./AbhayaLibre-Medium.ttf"
+        font = ImageFont.truetype(fontpath, 30)
+        font2 = ImageFont.truetype(fontpath, 24)
+        img_pil = Image.fromarray(img)
+        draw = ImageDraw.Draw(img_pil)
+        draw.text((20, 50), "{}".format(self.numer), font=font, fill=color)
+        draw.text((220, 50), "AKT", font=font, fill=self.text_kolor)
+        draw.text((170, 80), "WŁASNOŚCI", font=font, fill=self.text_kolor)
         text_width = int(cv2.getTextSize("{}".format(self.nazwa_panstwa).upper(), 0, 0.8, 0)[0][0] / 2)
-        cv2.putText(img, "{}".format(self.nazwa_panstwa).upper(), (250 - text_width, 140), 0, 0.8, self.text_kolor,
-                    thickness=2)
-
+        draw.text((245-text_width, 110), "{}".format(self.nazwa_panstwa).upper(), font=font, fill=self.text_kolor)
         text_width = int(cv2.getTextSize("{}".format(self.nazwa_pola).upper(), 0, 0.8, 0)[0][0] / 2)
-        cv2.putText(img, "{}".format(self.nazwa_pola).upper(), (250 - text_width, 170), 0, 0.8, self.text_kolor,
-                    thickness=2)
+        draw.text((245 - text_width, 140), "{}".format(self.nazwa_pola).upper(), font=font, fill=self.text_kolor)
 
-        thickness = 1
-        cv2.putText(img, "Cena zakupu", (25, 250), 0, 0.7, color, thickness)
-        cv2.putText(img, "Oplata za postoj", (25, 275), 0, 0.7, color, thickness)
-        cv2.putText(img, "- teren niezabudowany", (25, 300), 0, 0.7, color, thickness)
-        cv2.putText(img, "- teren z 1 domem", (25, 325), 0, 0.7, color, thickness)
-        cv2.putText(img, "- teren z 2 domami", (25, 350), 0, 0.7, color, thickness)
-        cv2.putText(img, "- teren z 3 domami", (25, 375), 0, 0.7, color, thickness)
-        cv2.putText(img, "- teren z 4 domami", (25, 400), 0, 0.7, color, thickness)
-        cv2.putText(img, "- teren z 1 hotelem", (25, 425), 0, 0.7, color, thickness)
+        draw.text((25, 225), "Cena zakupu", font=font2, fill=color)
+        draw.text((25, 250), "Opłata za postój", font=font2, fill=color)
+        draw.text((25, 275), "- teren niezabudowany", font=font2, fill=color)
+        draw.text((25, 300), "- teren z 1 domem", font=font2, fill=color)
+        draw.text((25, 325), "- teren z 2 domami", font=font2, fill=color)
+        draw.text((25, 350), "- teren z 3 domami", font=font2, fill=color)
+        draw.text((25, 375), "- teren z 4 domami", font=font2, fill=color)
+        draw.text((25, 400),  "- teren z 1 hotelem", font=font2, fill=color)
 
-        cv2.putText(img, "$ {}".format(self.cena), (375, 250), 0, 0.7, color, thickness)
-        cv2.putText(img, "{}".format(self.placa_niezabudowany), (375, 300), 0, 0.7, color, thickness)
-        cv2.putText(img, "{}".format(self.placa1dom), (375, 325), 0, 0.7, color, thickness)
-        cv2.putText(img, "{}".format(self.placa2dom), (375, 350), 0, 0.7, color, thickness)
-        cv2.putText(img, "{}".format(self.placa3dom), (375, 375), 0, 0.7, color, thickness)
-        cv2.putText(img, "{}".format(self.placa4dom), (375, 400), 0, 0.7, color, thickness)
-        cv2.putText(img, "{}".format(self.placa5dom), (375, 425), 0, 0.7, color, thickness)
+        draw.text((375, 225), "$ {}".format(self.cena), font=font2, fill=color)
+        draw.text((375, 275), "{}".format(self.placa_niezabudowany), font=font2, fill=color)
+        draw.text((375, 300), "{}".format(self.placa1dom), font=font2, fill=color)
+        draw.text((375, 325), "{}".format(self.placa2dom), font=font2, fill=color)
+        draw.text((375, 350), "{}".format(self.placa3dom), font=font2, fill=color)
+        draw.text((375, 375), "{}".format(self.placa4dom), font=font2, fill=color)
+        draw.text((375, 400), "{}".format(self.placa5dom), font=font2, fill=color)
 
-        cv2.line(img, (0, 435), (500, 435), color, thickness)
-        cv2.putText(img, "Jezeli gracz posiada  wszystkie  tereny", (25, 460), 0, 0.7, color, thickness)
-        cv2.putText(img, "budowlane  w  tym  panstwie i sa one", (25, 485), 0, 0.7, color, thickness)
-        cv2.putText(img, "niezabudowane to oplata jest podwojna", (25, 510), 0, 0.7, color, thickness)
-        cv2.line(img, (0, 525), (500, 525), color, thickness)
+        draw.text((25, 440), "Jeżeli  gracz  posiada  wszystkie  tereny", font=font2, fill=color)
+        draw.text((25, 465), "budowlane   w   tym   państwie  i  są one", font=font2, fill=color)
+        draw.text((25, 490), "niezabudowane to opłata jest podwójna", font=font2, fill=color)
 
-        cv2.putText(img, "1 dom kosztuje", (25, 550), 0, 0.7, color, thickness)
-        cv2.putText(img, "1 hotel kosztuje 4 domy +", (25, 575), 0, 0.7, color, thickness)
-        cv2.putText(img, "Zastaw hipoteczny", (25, 600), 0, 0.7, color, thickness)
+        draw.text((25, 525), "1 dom kosztuje", font=font2, fill=color)
+        draw.text((25, 550), "1 hotel kosztuje 4 domy +", font=font2, fill=color)
+        draw.text((25, 575), "Zastaw hipoteczny", font=font2, fill=color)
 
-        cv2.putText(img, "{}".format(self.koszt_domku), (375, 550), 0, 0.7, color, thickness)
-        cv2.putText(img, "{}".format(self.koszt_domku), (375, 575), 0, 0.7, color, thickness)
-        cv2.putText(img, "{}".format(int(self.cena / 2)), (375, 600), 0, 0.7, color, thickness)
+        draw.text((375, 525), "{}".format(self.koszt_domku), font=font2, fill=color)
+        draw.text((375, 550), "{}".format(self.koszt_domku), font=font2, fill=color)
+        draw.text((375, 575), "{}".format(int(self.cena / 2)), font=font2, fill=color)
+        img = np.array(img_pil)
+
+        cv2.line(img, (0, 435), (500, 435), color)
+        cv2.line(img, (0, 525), (500, 525), color)
+
 
         return img
