@@ -41,10 +41,8 @@ class Card:
         draw.text((20, 50), "{}".format(self.numer), font=font, fill=color)
         draw.text((220, 50), "AKT", font=font, fill=self.text_kolor)
         draw.text((170, 80), "WŁASNOŚCI", font=font, fill=self.text_kolor)
-        text_width = int(cv2.getTextSize("{}".format(self.nazwa_panstwa).upper(), 0, 0.8, 0)[0][0] / 2)
-        draw.text((245-text_width, 110), "{}".format(self.nazwa_panstwa).upper(), font=font, fill=self.text_kolor)
-        text_width = int(cv2.getTextSize("{}".format(self.nazwa_pola).upper(), 0, 0.8, 0)[0][0] / 2)
-        draw.text((245 - text_width, 140), "{}".format(self.nazwa_pola).upper(), font=font, fill=self.text_kolor)
+        draw.text((int(250 - font.getsize("{}".format(self.nazwa_panstwa).upper())[0]/2), 110), "{}".format(self.nazwa_panstwa).upper(), font=font, fill=self.text_kolor)
+        draw.text((int(250 - font.getsize("{}".format(self.nazwa_pola).upper())[0]/2), 140), "{}".format(self.nazwa_pola).upper(), font=font, fill=self.text_kolor)
 
         draw.text((25, 225), "Cena zakupu", font=font2, fill=color)
         draw.text((25, 250), "Opłata za postój", font=font2, fill=color)
@@ -55,13 +53,13 @@ class Card:
         draw.text((25, 375), "- teren z 4 domami", font=font2, fill=color)
         draw.text((25, 400),  "- teren z 1 hotelem", font=font2, fill=color)
 
-        draw.text((375, 225), "$ {}".format(self.cena), font=font2, fill=color)
-        draw.text((375, 275), "{}".format(self.placa_niezabudowany), font=font2, fill=color)
-        draw.text((375, 300), "{}".format(self.placa1dom), font=font2, fill=color)
-        draw.text((375, 325), "{}".format(self.placa2dom), font=font2, fill=color)
-        draw.text((375, 350), "{}".format(self.placa3dom), font=font2, fill=color)
-        draw.text((375, 375), "{}".format(self.placa4dom), font=font2, fill=color)
-        draw.text((375, 400), "{}".format(self.placa5dom), font=font2, fill=color)
+        draw.text((450 - font2.getsize("$ {}".format(self.cena))[0], 225), "$ {}".format(self.cena), font=font2, fill=color)
+        draw.text((450 - font2.getsize("{}".format(self.placa_niezabudowany))[0], 275), "{}".format(self.placa_niezabudowany), font=font2, fill=color)
+        draw.text((450 - font2.getsize("{}".format(self.placa1dom))[0], 300), "{}".format(self.placa1dom), font=font2, fill=color)
+        draw.text((450 - font2.getsize("{}".format(self.placa2dom))[0], 325), "{}".format(self.placa2dom), font=font2, fill=color)
+        draw.text((450 - font2.getsize("{}".format(self.placa3dom))[0], 350), "{}".format(self.placa3dom), font=font2, fill=color)
+        draw.text((450 - font2.getsize("{}".format(self.placa4dom))[0], 375), "{}".format(self.placa4dom), font=font2, fill=color)
+        draw.text((450 - font2.getsize("{}".format(self.placa5dom))[0], 400), "{}".format(self.placa5dom), font=font2, fill=color)
 
         draw.text((25, 440), "Jeżeli  gracz  posiada  wszystkie  tereny", font=font2, fill=color)
         draw.text((25, 465), "budowlane   w   tym   państwie  i  są one", font=font2, fill=color)
@@ -71,13 +69,13 @@ class Card:
         draw.text((25, 550), "1 hotel kosztuje 4 domy +", font=font2, fill=color)
         draw.text((25, 575), "Zastaw hipoteczny", font=font2, fill=color)
 
-        draw.text((375, 525), "{}".format(self.koszt_domku), font=font2, fill=color)
-        draw.text((375, 550), "{}".format(self.koszt_domku), font=font2, fill=color)
-        draw.text((375, 575), "{}".format(int(self.cena / 2)), font=font2, fill=color)
+        draw.text((450 - font2.getsize("{}".format(self.koszt_domku))[0], 525), "{}".format(self.koszt_domku), font=font2, fill=color)
+        draw.text((450 - font2.getsize("{}".format(self.koszt_domku))[0], 550), "{}".format(self.koszt_domku), font=font2, fill=color)
+        draw.text((450 - font2.getsize("{}".format(int(self.cena / 2)))[0], 575), "{}".format(int(self.cena / 2)), font=font2, fill=color)
         img = np.array(img_pil)
 
         cv2.line(img, (0, 435), (500, 435), color)
         cv2.line(img, (0, 525), (500, 525), color)
-
+        print(font.getsize("Zastaw hipoteczny"))
 
         return img
