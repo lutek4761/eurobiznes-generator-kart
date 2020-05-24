@@ -12,5 +12,6 @@ class Card:
         self.placa5dom = dane[9]
 
     def __str__(self):
-        return "{}, {}, {}, {}, {}, {}".format(self.nazwa_pola, self.placa1dom, self.placa2dom, self.placa3dom,
-                                               self.placa4dom, self.placa5dom)
+        return "{}, {}, Koszt:{}, Placa:{}, {}, {}, {}, {}".format(self.nazwa_panstwa, self.nazwa_pola, self.cena,
+                                                              self.placa1dom, self.placa2dom, self.placa3dom,
+                                                              self.placa4dom, self.placa5dom)
